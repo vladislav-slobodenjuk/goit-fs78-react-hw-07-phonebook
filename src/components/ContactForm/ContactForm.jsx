@@ -11,25 +11,11 @@ export const ContactForm = () => {
 
   const dispatch = useDispatch();
 
-  // const [name, setName] = useState('');
-  // const [number, setNumber] = useState('');
-
-  // const handleInputChange = ({ target }) => {
-  // this.setState({ [target.name]: target.value });
-  // if (target.name === 'name') setName(target.value);
-  // if (target.name === 'number') setNumber(target.value);
-  // };
-
   const handleSubmit = e => {
     e.preventDefault();
 
     const name = e.target.name.value.trim();
     const number = e.target.number.value.trim();
-
-    // onHandleSubmit({ name, number });
-    // this.setState({ name: '', number: '' });
-    // setName('');
-    // setNumber('');
 
     const isExist = contacts.find(contact => contact.name === name);
     if (isExist) return alert(`${name} is already in contacts.`);

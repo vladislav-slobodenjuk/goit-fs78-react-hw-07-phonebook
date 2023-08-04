@@ -6,7 +6,6 @@ import { setFilterContacts } from 'redux/filterSlice';
 
 export const Filter = () => {
   const filter = useSelector(getFilter);
-
   const dispatch = useDispatch();
 
   const handleFilterChange = ({ target: { value } }) => {
@@ -25,8 +24,3 @@ export const Filter = () => {
     </StyledFilter>
   );
 };
-
-// Filter.propTypes = {
-//   filterValue: PropTypes.string.isRequired,
-//   onFilterChange: PropTypes.func.isRequired,
-// };

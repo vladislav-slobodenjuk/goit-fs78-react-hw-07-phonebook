@@ -8,7 +8,6 @@ import { deleteContact } from 'redux/contactsSlice';
 export const ContactList = () => {
   const { contacts } = useSelector(getContacts);
   const filter = useSelector(getFilter);
-
   const dispatch = useDispatch();
 
   const handleDeleteContact = id => {
