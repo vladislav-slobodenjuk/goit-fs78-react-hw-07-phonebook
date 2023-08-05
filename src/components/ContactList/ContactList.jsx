@@ -4,30 +4,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ListItem } from './ListItem/ListItem';
 import { StyledList } from './ContactList.styled';
 
-import { selectContacts, selectFilter } from 'redux/selectors';
-import { deleteContact, fetchContacts } from 'redux/operations';
+import { selectContacts, selectfilteredContacts } from 'redux/selectors';
+import { fetchContacts } from 'redux/operations';
 
 export const ContactList = () => {
   const { items, isLoading, error } = useSelector(selectContacts);
-  const filter = useSelector(selectFilter);
   const dispatch = useDispatch();
-
-  const handleDeleteContact = id => {
-    dispatch(deleteContact(id));
-  };
-
-  const filterContacts = () => {
-    const normalizedFilter = filter.toLowerCase();
-    return items.filter(({ name }) =>
-      name.toLowerCase().includes(normalizedFilter)
-    );
-  };
 
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  const filteredContacts = filterContacts();
+  const filteredContacts = useSelector(selectfilteredContacts);
 
   return (
     <StyledList>
@@ -35,7 +23,7 @@ export const ContactList = () => {
         <ListItem
           key={contact.id}
           contact={contact}
-          onDeleteClick={handleDeleteContact}
+          // onDeleteClick={handleDeleteContact}
         />
       ))}
       {filteredContacts.length === 0 &&

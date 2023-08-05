@@ -15,6 +15,7 @@ export const Filter = () => {
     <StyledFilter>
       <label htmlFor="filter">Find contacts by name</label>
       <input
+        id="filter"
         type="text"
         name="filter"
         value={filter}
