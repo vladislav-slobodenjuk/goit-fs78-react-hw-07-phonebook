@@ -15,7 +15,7 @@ export const ListItem = ({ contact, onDeleteClick }) => {
 };
 
 ListItem.propTypes = {
-  contact: PropTypes.exact({
+  contact: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     number: PropTypes.string.isRequired,

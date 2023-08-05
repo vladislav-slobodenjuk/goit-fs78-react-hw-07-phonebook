@@ -1,4 +1,3 @@
-// import PropTypes from 'prop-types';
 import { ListItem } from './ListItem/ListItem';
 import { StyledList } from './ContactList.styled';
 import { useDispatch, useSelector } from 'react-redux';
@@ -40,14 +39,3 @@ export const ContactList = () => {
     </StyledList>
   );
 };
-
-// ContactList.propTypes = {
-//   contacts: PropTypes.arrayOf(
-//     PropTypes.exact({
-//       id: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//       number: PropTypes.string.isRequired,
-//     })
-//   ).isRequired,
-//   onDeleteClick: PropTypes.func.isRequired,
-// };

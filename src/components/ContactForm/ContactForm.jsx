@@ -1,6 +1,3 @@
-// import { useState } from 'react';
-// import PropTypes from 'prop-types';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { StyledForm } from './ContactForm.styled';
 import { getContacts } from 'redux/selectors';
@@ -21,7 +18,6 @@ export const ContactForm = () => {
     if (isExist) return alert(`${name} is already in contacts.`);
 
     dispatch(addContact({ name, number }));
-
     e.target.reset();
   };
 
@@ -35,8 +31,6 @@ export const ContactForm = () => {
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
-          // value={name}
-          // onChange={handleInputChange}
         />
       </label>
 
@@ -48,15 +42,9 @@ export const ContactForm = () => {
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
-          // value={number}
-          // onChange={handleInputChange}
         />
       </label>
       <button type="submit">Add contact</button>
     </StyledForm>
   );
 };
-
-// ContactForm.propTypes = {
-//   onHandleSubmit: PropTypes.func.isRequired,
-// };
