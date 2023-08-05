@@ -4,14 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ListItem } from './ListItem/ListItem';
 import { StyledList } from './ContactList.styled';
 
-import { getContacts, getFilter } from 'redux/selectors';
-// import { deleteContact } from 'redux/contactsSlice';
+import { selectContacts, selectFilter } from 'redux/selectors';
 import { deleteContact, fetchContacts } from 'redux/operations';
-import { Loader } from 'components/Loader/Loader';
 
 export const ContactList = () => {
-  const { items, isLoading, error } = useSelector(getContacts);
-  const filter = useSelector(getFilter);
+  const { items, isLoading, error } = useSelector(selectContacts);
+  const filter = useSelector(selectFilter);
   const dispatch = useDispatch();
 
   const handleDeleteContact = id => {
@@ -58,7 +56,6 @@ export const ContactList = () => {
           <p className="emptyList">An Error acquired</p>
         </li>
       )}
-      {isLoading && <Loader />}
     </StyledList>
   );
 };

@@ -1,11 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { StyledForm } from './ContactForm.styled';
-import { getContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/selectors';
 import { addContact } from 'redux/operations';
 
 export const ContactForm = () => {
-  const { items } = useSelector(getContacts);
-
+  const { items } = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   const handleSubmit = e => {

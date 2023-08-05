@@ -1,21 +1,14 @@
-// import { useEffect } from 'react';
-
 import { Container } from './App.styled';
 import { ContactForm } from '../ContactForm/ContactForm';
 import { ContactList } from '../ContactList/ContactList';
 import { Filter } from '../Filter/Filter';
+import { Loader } from 'components/Loader/Loader';
+
+import { useSelector } from 'react-redux';
+import { selectContacts } from 'redux/selectors';
 
 export const App = () => {
-  // useEffect(() => {
-  //   const savedContacts = JSON.parse(localStorage.getItem(STORAGE_KEY));
-  //   // console.log('savedContacts', savedContacts);
-  //   if (savedContacts) setContacts(savedContacts);
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem(STORAGE_KEY, JSON.stringify(contacts));
-  //   // console.log('second');
-  // }, [contacts]);
+  const { isLoading } = useSelector(selectContacts);
 
   return (
     <Container>
@@ -25,6 +18,8 @@ export const App = () => {
       <h2>Contacts</h2>
       <Filter />
       <ContactList />
+
+      {isLoading && <Loader />}
     </Container>
   );
 };
