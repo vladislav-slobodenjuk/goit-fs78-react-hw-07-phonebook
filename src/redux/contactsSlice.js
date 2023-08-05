@@ -1,4 +1,4 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { addContact, deleteContact, fetchContacts } from './operations';
 
 const contactsInitialState = {
@@ -10,21 +10,21 @@ const contactsInitialState = {
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: contactsInitialState,
-  reducers: {
-    addContact: {
-      reducer(state, action) {
-        state.contacts.push(action.payload);
-      },
-      prepare({ name, number }) {
-        return {
-          payload: { id: nanoid(), name, number },
-        };
-      },
-    },
-    deleteContact(state, { payload }) {
-      state.contacts = state.contacts.filter(contact => contact.id !== payload);
-    },
-  },
+  // reducers: {
+  //   addContact: {
+  //     reducer(state, action) {
+  //       state.contacts.push(action.payload);
+  //     },
+  //     prepare({ name, number }) {
+  //       return {
+  //         payload: { id: nanoid(), name, number },
+  //       };
+  //     },
+  //   },
+  //   deleteContact(state, { payload }) {
+  //     state.contacts = state.contacts.filter(contact => contact.id !== payload);
+  //   },
+  // },
   extraReducers: builder =>
     builder
       .addCase(fetchContacts.pending, state => {
@@ -33,7 +33,6 @@ const contactsSlice = createSlice({
       })
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.items = action.payload;
-        // console.log(action.payload);
         state.isLoading = false;
         state.error = null;
       })
@@ -61,7 +60,7 @@ const contactsSlice = createSlice({
         state.error = null;
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
-        const idx = state.items.findIndex(item => (item.id = action.payload));
+        const idx = state.items.findIndex(item => item.id === action.payload);
         state.items.splice(idx, 1);
         // state.items = state.items.filter(item => item.id !== action.payload);
         state.isLoading = false;
@@ -74,5 +73,4 @@ const contactsSlice = createSlice({
       }),
 });
 
-// export const { deleteContact } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;
