@@ -5,8 +5,8 @@ import { ListItem } from './ListItem/ListItem';
 import { StyledList } from './ContactList.styled';
 
 import { getContacts, getFilter } from 'redux/selectors';
-import { deleteContact } from 'redux/contactsSlice';
-import { fetchContacts } from 'redux/operations';
+// import { deleteContact } from 'redux/contactsSlice';
+import { deleteContact, fetchContacts } from 'redux/operations';
 import { Loader } from 'components/Loader/Loader';
 
 export const ContactList = () => {
