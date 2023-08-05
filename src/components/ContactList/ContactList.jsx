@@ -1,11 +1,16 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { ListItem } from './ListItem/ListItem';
 import { StyledList } from './ContactList.styled';
-import { useDispatch, useSelector } from 'react-redux';
+
 import { getContacts, getFilter } from 'redux/selectors';
 import { deleteContact } from 'redux/contactsSlice';
+import { fetchContacts } from 'redux/operations';
+import { Loader } from 'components/Loader/Loader';
 
 export const ContactList = () => {
-  const { contacts } = useSelector(getContacts);
+  const { items, isLoading, error } = useSelector(getContacts);
   const filter = useSelector(getFilter);
   const dispatch = useDispatch();
 
@@ -15,10 +20,14 @@ export const ContactList = () => {
 
   const filterContacts = () => {
     const normalizedFilter = filter.toLowerCase();
-    return contacts.filter(({ name }) =>
+    return items.filter(({ name }) =>
       name.toLowerCase().includes(normalizedFilter)
     );
   };
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   const filteredContacts = filterContacts();
 
@@ -31,11 +40,25 @@ export const ContactList = () => {
           onDeleteClick={handleDeleteContact}
         />
       ))}
-      {contacts.length === 0 && (
+      {filteredContacts.length === 0 &&
+        items.length !== 0 &&
+        !isLoading &&
+        !error && (
+          <li>
+            <p className="emptyList">Nothing found</p>
+          </li>
+        )}
+      {items.length === 0 && !isLoading && !error && (
         <li>
-          <p className="emptyList">Nothing found</p>
+          <p className="emptyList">No saved contacts</p>
         </li>
       )}
+      {error && (
+        <li>
+          <p className="emptyList">An Error acquired</p>
+        </li>
+      )}
+      {isLoading && <Loader />}
     </StyledList>
   );
 };

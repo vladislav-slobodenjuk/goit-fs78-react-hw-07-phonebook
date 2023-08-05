@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 
 export const ListItem = ({ contact, onDeleteClick }) => {
-  const { id, name, number } = contact;
+  const { id, name, phone } = contact;
   return (
     <li>
       <p>
-        {name}: <span>{number}</span>
+        {name}: <span>{phone}</span>
       </p>
       <button type="button" onClick={() => onDeleteClick(id)}>
         Delete
@@ -18,7 +18,7 @@ ListItem.propTypes = {
   contact: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    number: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
   }).isRequired,
   onDeleteClick: PropTypes.func.isRequired,
 };
