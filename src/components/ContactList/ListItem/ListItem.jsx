@@ -2,8 +2,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { deleteContact } from 'redux/operations';
 
-export const ListItem = ({ contact }) => {
-  const { id, name, phone } = contact;
+export const ListItem = ({ contact: { id, name, phone } }) => {
   const dispatch = useDispatch();
 
   const handleDelete = id => {
